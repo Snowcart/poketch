@@ -1,0 +1,17 @@
+.DS_STORE
+packages/
+
+.vs/
+*.user
+bin/
+obj/
+Publish/
+
+# node specific
+node_modules
+*/wwwroot/dist/
+npm-debug.log
+initialData.ts
+dist
+exports
+package-lock.json

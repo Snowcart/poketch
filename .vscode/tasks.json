@@ -1,0 +1,15 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "npm",
+			"script": "lint",
+			"label": "npm: lint",
+			"auto": true,
+			"problemMatcher": {
+				"base": "$tslint5",
+				"fileLocation": "absolute"
+			},
+		}
+	]
+}

@@ -1,0 +1,8 @@
+steps:
+  - label: "node v"
+    commands:
+      - "node -v"
+
+  - label: "Install"
+    commands:
+      - "npm install"

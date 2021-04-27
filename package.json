@@ -1,0 +1,47 @@
+{
+	"name": "poketch",
+	"version": "1.0.0",
+	"description": "Open Source Poketch App",
+	"main": "webpack.common.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"webpack-prod-analyze": "webpack --config webpack.production.js --profile --json > dist/stats.json && webpack-bundle-analyzer dist/stats.json",
+		"webpack-prod": "webpack --config webpack.production.js",
+		"webpack-dev": "webpack --config webpack.development.js",
+		"lint": "npx prettier --check src/**/*.{js,jsx,ts,tsx} && src/**/*.{js,jsx,ts,tsx} && eslint src/**/*.{js,jsx,ts,tsx}"
+	},
+	"author": "Carter Snowden",
+	"license": "ISC",
+	"devDependencies": {
+		"@types/react-autocomplete": "^1.8.5",
+		"eslint": "^7.6.0",
+		"eslint-plugin-react": "^7.20.6",
+		"prettier": "^2.0.5",
+		"webpack-bundle-analyzer": "^3.8.0"
+	},
+	"dependencies": {
+		"@types/react-dom": "^16.9.8",
+		"@types/react-jss": "^10.0.0",
+		"@types/react-select": "^3.0.13",
+		"@types/styled-components": "^5.1.0",
+		"css-loader": "^3.5.3",
+		"file-loader": "^6.0.0",
+		"fork-ts-checker-webpack-plugin": "^4.1.4",
+		"html-webpack-harddisk-plugin": "^1.0.1",
+		"html-webpack-plugin": "^4.3.0",
+		"js-file-download": "^0.4.12",
+		"react": "^16.13.1",
+		"react-autocomplete": "^1.8.1",
+		"react-dom": "^16.13.1",
+		"react-dropdown": "^1.7.0",
+		"react-jss": "^10.1.1",
+		"react-select": "^3.1.0",
+		"styled-components": "^5.1.1",
+		"ts-loader": "^7.0.4",
+		"typescript": "^3.9.3",
+		"webpack": "^4.43.0",
+		"webpack-cli": "^3.3.11",
+		"webpack-dev-server": "^3.11.0",
+		"webpack-merge": "^4.2.2"
+	}
+}
