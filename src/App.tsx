@@ -1,12 +1,15 @@
 import * as React from 'react';
 import { createGlobalStyle } from 'styled-components';
 import Counter from './commonComponents/Counter';
+import Pokemon from './models/Pokemon';
+
+// TODO: make each game into a enum;
 
 export default () => {
 	return (
 		<>
 			<GlobalStyle />
-			<Counter />
+			<Counter pokemon={{} as Pokemon} game="sw/sh" /> {/* this will obvi be moving from here */}
 		</>
 	);
 };
@@ -19,6 +22,7 @@ body {
 	font-family: 'VT323', monospace;
 	height: 100%;
 	margin: 0;
+	color: #ffff;
 }
 body, input {
 	background-color: #2e2e2e;
