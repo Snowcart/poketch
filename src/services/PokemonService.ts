@@ -22,5 +22,7 @@ export const getPokemonAsArray = (jsonString: string) =>
                 }
             })
         }
-    })
+    });
+
+    return pokemon;
 }
