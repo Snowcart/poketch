@@ -12,17 +12,34 @@ import Pokemon from '../models/Pokemon';
 const defaultImageUrl = 'https://play.pokemonshowdown.com/sprites/ani-shiny/charizard-gmax.gif';
 const imageHeightAndWidth = '150px';
 
-const Counter = ({ pokemon, game }: Props) => {
+const Counter = ({ pokemon, game, wide }: Props) => {
 	const [number, setNumber] = React.useState(0);
+
+	const handleUserKeyPress = React.useCallback(
+		(event) => {
+			console.log('running');
+			if (event.key === '`') setNumber(number + 1);
+		},
+		[number]
+	);
+
+	React.useEffect(() => {
+		window.addEventListener('keydown', handleUserKeyPress);
+
+		return () => {
+			window.removeEventListener('keydown', handleUserKeyPress);
+		};
+	}, [handleUserKeyPress]);
+
 	return (
-		<StyledBorder onClick={() => setNumber(number + 1)}>
+		<StyledBorder onClick={() => setNumber(number + 1)} wide={wide}>
 			<PokemonName>{pokemon.englishName ?? 'Charizard (G-Max)'}</PokemonName>
-			<PokemonContainer>
+			<PokemonContainer wide={wide}>
 				<PokemonSphere>
 					<img src={pokemon.imageUrl ?? defaultImageUrl} alt="pokemon image" />
 				</PokemonSphere>
 			</PokemonContainer>
-			<StyledCounter>{number}</StyledCounter>
+			<StyledCounter wide={wide}>{number}</StyledCounter>
 		</StyledBorder>
 	);
 };
@@ -30,13 +47,18 @@ const Counter = ({ pokemon, game }: Props) => {
 interface Props {
 	pokemon: Pokemon;
 	game: string;
+	wide?: boolean;
 }
 
-const StyledBorder = styled.div`
+Counter.defaultProps = {
+	wide: false
+};
+
+const StyledBorder = styled.div<{ wide: boolean }>`
 	background-color: ${backgroundBlue};
 	background: linear-gradient(35deg, rgba(2, 0, 36, 1) 0%, rgba(9, 9, 121, 1) 35%, rgba(0, 212, 255, 1) 100%);
-	width: 270px;
-	height: 400px;
+	width: ${(props) => (props.wide ? '400px' : '270px')};
+	height: ${(props) => (props.wide ? '250px' : '400px')};
 	border-radius: 12px;
 `;
 
@@ -44,14 +66,16 @@ const PokemonName = styled.h2`
 	font-size: 24px;
 	font-weight: bold;
 	margin-left: 15px;
+	margin-top: 0;
 `;
 
-const PokemonContainer = styled.div`
+const PokemonContainer = styled.div<{ wide: boolean }>`
 	width: 100%;
 	height: 200px;
 	margin: auto;
-	margin-top: 40px;
+	margin-top: ${(props) => (props.wide ? '0' : '40px')};
 	margin-bottom: 60px;
+	display: ${(props) => (props.wide ? 'inline-flex' : 'block')};
 `;
 
 // TODO: Make the height and width a var.
@@ -73,11 +97,12 @@ const PokemonSphere = styled.div`
 	}
 `;
 
-const StyledCounter = styled.div`
+const StyledCounter = styled.div<{ wide: boolean }>`
 	height: 30%;
 	font-size: 42px;
 	margin: auto;
 	width: 50px;
+	display: ${(props) => (props.wide ? 'inline-flex' : 'block')};
 `;
 
 export default Counter;

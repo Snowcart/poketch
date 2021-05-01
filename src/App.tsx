@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { createGlobalStyle } from 'styled-components';
 import Counter from './commonComponents/Counter';
 import Pokemon from './models/Pokemon';
@@ -9,7 +10,10 @@ export default () => {
 	return (
 		<>
 			<GlobalStyle />
-			<Counter pokemon={{} as Pokemon} game="sw/sh" /> {/* this will obvi be moving from here */}
+			<Router>
+				<Route exact path="/stream" render={() => <Counter pokemon={{} as Pokemon} game="sw/sh" />} />
+				<Route exact path="/stream-wide" render={() => <Counter pokemon={{} as Pokemon} game="sw/sh" wide />} />
+			</Router>
 		</>
 	);
 };
@@ -25,7 +29,7 @@ body {
 	color: #ffff;
 }
 body, input {
-	background-color: #2e2e2e;
+	background-color: transparent;
 }
 #app {
 	height: 100%;
