@@ -1,6 +1,7 @@
 import * as React from 'react';
+import { v4 as uuidv4 } from 'uuid';
 import Hunt from '../../models/Hunt';
-import { getDataFromLocalStorage, setDataInStorage } from 'src/services/LocalStorageService';
+import { getDataFromLocalStorage, setDataInStorage } from '../../services/LocalStorageService';
 import { UserDataContext } from './UserDataContext';
 import UserData from '../../models/UserData';
 

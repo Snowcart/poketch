@@ -1,4 +1,5 @@
 import UserData from "src/models/UserData";
+import { v4 as uuidv4 } from 'uuid';
 
 const userDataKey = 'userData';
 
@@ -6,12 +7,12 @@ const getDataFromLocalStorage = (): UserData => {
 	const rawUserData = localStorage.getItem(userDataKey);
 	if (rawUserData) return JSON.parse(rawUserData);
 
-	if (!rawUserData) return {} as UserData;
+	if (!rawUserData) return { name: uuidv4(), currentHunts: [], completedHunts: [] } as UserData;
 	try {
 		return JSON.parse(rawUserData);
 	} catch (e) {
 		console.error(`Failed to parse JSON from storage: ${rawUserData}`);
-		return {} as UserData;
+		return { name: uuidv4(), currentHunts: [], completedHunts: [] } as UserData;
 	}
 };
 
