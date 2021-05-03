@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { createGlobalStyle } from 'styled-components';
 import Counter from './commonComponents/Counter';
 import Pokemon from './models/Pokemon';
+import MainPage from './pagedComponents/MainPage';
 
 // TODO: make each game into a enum;
 
@@ -11,6 +12,7 @@ export default () => {
 		<>
 			<GlobalStyle />
 			<Router>
+				<Route exact path="/" component={MainPage} />
 				<Route exact path="/stream" render={() => <Counter pokemon={{} as Pokemon} game="sw/sh" />} />
 				<Route exact path="/stream-wide" render={() => <Counter pokemon={{} as Pokemon} game="sw/sh" wide />} />
 			</Router>

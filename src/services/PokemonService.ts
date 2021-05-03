@@ -18,7 +18,7 @@ export const getPokemonAsArray = (jsonString: string) =>
                 }
                 catch(e)
                 {
-                    console.log("Error when trying to parse int in available games" + e);
+                    console.log("Error when trying to parse int in available games" + e); 
                 }
             })
         }
