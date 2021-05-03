@@ -16,6 +16,20 @@ Paged components are components that take reusable components and render them. T
 ### Reusable Components
 These components should be able to be reused everywhere. They are completely generic and should only need the props they take. In the lego analogy they are the bricks used. Their only dependency should be the props they take.
 
+### Handling global state
+The global state can be accessed from any paged component. It is accessed through context like this: `const context = React.useContext(userDataContext);`. This context object now holds the global state, and all relevent functions in it.
+
+In the global state there is a `UserData` object that holds two arrays of hunts. The `completedHunts` and `currentHunts`. There are also helper functions stored in this global context, and those helper functions are the only way this data should ever be updated, as any other manipulation of the data will not be saved to global state.
+
+There is: 
+- addActiveHunt: this adds a new Hunt Object to the `currentHunts` array
+- finishHunt: this takes a hunt Id and the hunt from `currentHunts` to `completedHunts`
+- addFinishedHunt: this takes a hunt object, and adds it to the `completedHunts` array
+- removeActiveHunt: this takes a hunt id and removes the hunt from `currentHunts` array
+- removeFinishedHunt: this takes a hunt id and removes the hunt from `completedHunts` array
+
+Every time any of these functions are called, the data will update in the local storage, and will persist across application refreshes and browser closing for the most part.
+
 ### Coding Standards:
 - Use Functional Components, do not use Javascript Classes
 - Use hooks where appropriate
