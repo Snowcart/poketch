@@ -26,7 +26,12 @@ export default () => {
 							exact
 							path="/stream"
 							render={() => (
-								<Counter hunt={userDataValue.userData.currentHunts[0]} setHuntCounter={userDataValue.setHuntCounter} />
+								<Counter
+									hunt={userDataValue.userData.currentHunts[0]}
+									setHuntCounter={userDataValue.setHuntCounter}
+									removeActiveHunt={userDataValue.removeActiveHunt}
+									finishHunt={userDataValue.finishHunt}
+								/>
 							)}
 						/>
 						<Route
@@ -36,6 +41,8 @@ export default () => {
 								<Counter
 									hunt={userDataValue.userData.currentHunts[0]}
 									setHuntCounter={userDataValue.setHuntCounter}
+									removeActiveHunt={userDataValue.removeActiveHunt}
+									finishHunt={userDataValue.finishHunt}
 									wide
 								/>
 							)}

@@ -3,6 +3,7 @@ import { backgroundBlue } from '../utility/colors';
 import styled from 'styled-components';
 import Pokemon from '../models/Pokemon';
 import Hunt from '../models/Hunt';
+import deleteSvg from '../images/delete.svg';
 
 // TODO: Add props
 // Get Image dynamically
@@ -18,7 +19,6 @@ const Counter = (props: Props) => {
 	const increaseCounter = () => props.setHuntCounter(id, count + 1);
 	const handleUserKeyPress = React.useCallback(
 		(event) => {
-			console.log('running');
 			if (event.key === '`') increaseCounter();
 		},
 		[count]
@@ -33,14 +33,19 @@ const Counter = (props: Props) => {
 	}, [handleUserKeyPress]);
 
 	return (
-		<StyledBorder onClick={() => increaseCounter()} wide={props.wide}>
+		<StyledBorder wide={props.wide}>
 			<PokemonName>{pokemon.englishName ?? 'Charizard (G-Max)'}</PokemonName>
-			<PokemonContainer wide={props.wide}>
-				<PokemonSphere>
-					<img src={pokemon.imageUrl ?? defaultImageUrl} alt="pokemon image" />
-				</PokemonSphere>
-			</PokemonContainer>
-			<StyledCounter wide={props.wide}>{count}</StyledCounter>
+			<DeleteIcon onClick={() => props.removeActiveHunt(id)}>
+				<img src={deleteSvg} alt="delete" />
+			</DeleteIcon>
+			<div onClick={() => increaseCounter()}>
+				<PokemonContainer wide={props.wide}>
+					<PokemonSphere>
+						<img src={pokemon.imageUrl ?? defaultImageUrl} alt="pokemon image" />
+					</PokemonSphere>
+				</PokemonContainer>
+				<StyledCounter wide={props.wide}>{count}</StyledCounter>
+			</div>
 		</StyledBorder>
 	);
 };
@@ -48,6 +53,8 @@ const Counter = (props: Props) => {
 interface Props {
 	hunt: Hunt;
 	setHuntCounter: (id: string, count: number) => void;
+	finishHunt: (id: string) => void;
+	removeActiveHunt: (id: string) => void;
 	wide?: boolean;
 }
 
@@ -68,13 +75,16 @@ const PokemonName = styled.h2`
 	font-weight: bold;
 	margin-left: 15px;
 	margin-top: 0;
+	float: left;
+`;
+
+const DeleteIcon = styled.div`
+	float: right;
 `;
 
 const PokemonContainer = styled.div<{ wide: boolean }>`
 	width: 100%;
-	height: 200px;
 	margin: auto;
-	margin-top: ${(props) => (props.wide ? '0' : '40px')};
 	margin-bottom: 60px;
 	display: ${(props) => (props.wide ? 'inline-flex' : 'block')};
 `;

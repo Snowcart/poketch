@@ -75,7 +75,15 @@ const MainPage = () => {
 				<Button onClick={handleAddHunt} text="Add hunt" />
 
 				{context.userData.currentHunts?.map((x) => {
-					return <Counter hunt={x} setHuntCounter={context.setHuntCounter} key={x.id} />;
+					return (
+						<Counter
+							hunt={x}
+							setHuntCounter={context.setHuntCounter}
+							finishHunt={context.finishHunt}
+							removeActiveHunt={context.removeActiveHunt}
+							key={x.id}
+						/>
+					);
 				})}
 
 				<Dialog
