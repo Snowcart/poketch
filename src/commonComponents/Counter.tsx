@@ -2,6 +2,7 @@ import * as React from 'react';
 import { backgroundBlue } from '../utility/colors';
 import styled from 'styled-components';
 import Pokemon from '../models/Pokemon';
+import Hunt from '../models/Hunt';
 
 // TODO: Add props
 // Get Image dynamically
@@ -12,15 +13,15 @@ import Pokemon from '../models/Pokemon';
 const defaultImageUrl = 'https://play.pokemonshowdown.com/sprites/ani-shiny/charizard-gmax.gif';
 const imageHeightAndWidth = '150px';
 
-const Counter = ({ pokemon, game, wide }: Props) => {
-	const [number, setNumber] = React.useState(0);
-
+const Counter = (props: Props) => {
+	const { pokemon, count, id } = props.hunt;
+	const increaseCounter = () => props.setHuntCounter(id, count + 1);
 	const handleUserKeyPress = React.useCallback(
 		(event) => {
 			console.log('running');
-			if (event.key === '`') setNumber(number + 1);
+			if (event.key === '`') increaseCounter();
 		},
-		[number]
+		[count]
 	);
 
 	React.useEffect(() => {
@@ -32,21 +33,21 @@ const Counter = ({ pokemon, game, wide }: Props) => {
 	}, [handleUserKeyPress]);
 
 	return (
-		<StyledBorder onClick={() => setNumber(number + 1)} wide={wide}>
+		<StyledBorder onClick={() => increaseCounter()} wide={props.wide}>
 			<PokemonName>{pokemon.englishName ?? 'Charizard (G-Max)'}</PokemonName>
-			<PokemonContainer wide={wide}>
+			<PokemonContainer wide={props.wide}>
 				<PokemonSphere>
 					<img src={pokemon.imageUrl ?? defaultImageUrl} alt="pokemon image" />
 				</PokemonSphere>
 			</PokemonContainer>
-			<StyledCounter wide={wide}>{number}</StyledCounter>
+			<StyledCounter wide={props.wide}>{count}</StyledCounter>
 		</StyledBorder>
 	);
 };
 
 interface Props {
-	pokemon: Pokemon;
-	game: string;
+	hunt: Hunt;
+	setHuntCounter: (id: string, count: number) => void;
 	wide?: boolean;
 }
 

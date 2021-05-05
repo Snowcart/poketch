@@ -9,6 +9,7 @@ export interface UserDataContext {
 	addFinishedHunt: (hunt: Hunt) => void;
 	removeActiveHunt: (id: string) => void;
 	removeFinishedHunt: (id: string) => void;
+	setHuntCounter: (id: string, count: number) => void;
 }
 
 const defaultUserDataContext = {
@@ -17,7 +18,8 @@ const defaultUserDataContext = {
 	finishHunt: () => {},
 	addFinishedHunt: () => {},
 	removeActiveHunt: () => {},
-	removeFinishedHunt: () => {}
+	removeFinishedHunt: () => {},
+	setHuntCounter: () => {}
 }
 
 export const userDataContext = React.createContext<UserDataContext>(defaultUserDataContext);

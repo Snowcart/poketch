@@ -24,6 +24,12 @@ export const useUserDataContext = (): UserDataContext => {
 		[userData.currentHunts]
 	);
 
+	const setHuntCounter = (id: string, count: number) => {
+		const updatedUserData = { ...userData };
+		updatedUserData.currentHunts.find((x) => x.id === id).count = count;
+		updateTheUserObject(updatedUserData);
+	};
+
 	const finishHunt = (id: string) => {
 		const updatedUserData = { ...userData };
 		const hunt = updatedUserData.currentHunts.find((x) => x.id === id);
@@ -68,6 +74,7 @@ export const useUserDataContext = (): UserDataContext => {
 		finishHunt,
 		addFinishedHunt,
 		removeActiveHunt,
-		removeFinishedHunt
+		removeFinishedHunt,
+		setHuntCounter
 	};
 };

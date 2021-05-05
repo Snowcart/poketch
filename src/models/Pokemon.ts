@@ -6,6 +6,5 @@ export default interface Pokemon
     frenchName: string;
     japaneseName: string;
     availableGames: number[];
-    altForm: string;
     imageUrl: string;
 }

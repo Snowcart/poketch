@@ -6,6 +6,8 @@
 		"module": "es6",
 		"moduleResolution": "node",
 		"noImplicitAny": true,
+		"resolveJsonModule": true,
+		"esModuleInterop": true,
 		"outDir": "./wwwroot/dist/",
 		"paths": {
 			"react": ["node_modules/react"]

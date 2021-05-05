@@ -2,6 +2,8 @@ import * as React from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { createGlobalStyle } from 'styled-components';
 import Counter from './commonComponents/Counter';
+import pokemonContext from './context/pokemonContext/PokemonContext';
+import { usePokemonContext } from './context/pokemonContext/usePokemonContext';
 import { userDataContext } from './context/userDataContext/UserDataContext';
 import { useUserDataContext } from './context/userDataContext/useUserDataContext';
 import Pokemon from './models/Pokemon';
@@ -11,16 +13,35 @@ import MainPage from './pagedComponents/MainPage';
 
 export default () => {
 	const userDataValue = useUserDataContext();
+	const pokemonValue = usePokemonContext();
 	const streamMode = window.location.pathname.includes('stream'); // TODO: this should use the react router
 	return (
 		<>
 			<GlobalStyle streamMode={streamMode} />
 			<userDataContext.Provider value={userDataValue}>
-				<Router>
-					<Route exact path="/" component={MainPage} />
-					<Route exact path="/stream" render={() => <Counter pokemon={{} as Pokemon} game="sw/sh" />} />
-					<Route exact path="/stream-wide" render={() => <Counter pokemon={{} as Pokemon} game="sw/sh" wide />} />
-				</Router>
+				<pokemonContext.Provider value={pokemonValue}>
+					<Router>
+						<Route exact path="/" component={MainPage} />
+						<Route
+							exact
+							path="/stream"
+							render={() => (
+								<Counter hunt={userDataValue.userData.currentHunts[0]} setHuntCounter={userDataValue.setHuntCounter} />
+							)}
+						/>
+						<Route
+							exact
+							path="/stream-wide"
+							render={() => (
+								<Counter
+									hunt={userDataValue.userData.currentHunts[0]}
+									setHuntCounter={userDataValue.setHuntCounter}
+									wide
+								/>
+							)}
+						/>
+					</Router>
+				</pokemonContext.Provider>
 			</userDataContext.Provider>
 		</>
 	);
