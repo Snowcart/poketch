@@ -8,6 +8,7 @@ import { userDataContext } from './context/userDataContext/UserDataContext';
 import { useUserDataContext } from './context/userDataContext/useUserDataContext';
 import Pokemon from './models/Pokemon';
 import MainPage from './pagedComponents/MainPage';
+import StreamWrapper from './pagedComponents/StreamWrapper';
 
 // TODO: make each game into a enum;
 
@@ -22,31 +23,8 @@ export default () => {
 				<pokemonContext.Provider value={pokemonValue}>
 					<Router>
 						<Route exact path="/" component={MainPage} />
-						<Route
-							exact
-							path="/stream"
-							render={() => (
-								<Counter
-									hunt={userDataValue.userData.currentHunts[0]}
-									setHuntCounter={userDataValue.setHuntCounter}
-									removeActiveHunt={userDataValue.removeActiveHunt}
-									finishHunt={userDataValue.finishHunt}
-								/>
-							)}
-						/>
-						<Route
-							exact
-							path="/stream-wide"
-							render={() => (
-								<Counter
-									hunt={userDataValue.userData.currentHunts[0]}
-									setHuntCounter={userDataValue.setHuntCounter}
-									removeActiveHunt={userDataValue.removeActiveHunt}
-									finishHunt={userDataValue.finishHunt}
-									wide
-								/>
-							)}
-						/>
+						<Route exact path="/stream" render={() => <StreamWrapper />} />
+						<Route exact path="/stream-wide" render={() => <StreamWrapper wide />} />
 					</Router>
 				</pokemonContext.Provider>
 			</userDataContext.Provider>
@@ -60,6 +38,9 @@ html {
 }
 body {
 	font-family: 'VT323', monospace;
+	input, button {
+		font-family: 'VT-323', monospace;
+	}
 	margin: 0;
 	color: #ffff;
 	${(props) =>

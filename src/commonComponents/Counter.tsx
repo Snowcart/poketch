@@ -17,18 +17,21 @@ const imageHeightAndWidth = '150px';
 const Counter = (props: Props) => {
 	const { pokemon, count, id } = props.hunt;
 	const increaseCounter = () => props.setHuntCounter(id, count + 1);
+	const [editingCount, setEditingCount] = React.useState(false);
 	const handleUserKeyPress = React.useCallback(
 		(event) => {
+			event.stopPropagation();
 			if (event.key === '`') increaseCounter();
+			if (event.key === 'e') setEditingCount(!editingCount);
 		},
 		[count]
 	);
 
 	React.useEffect(() => {
-		window.addEventListener('keydown', handleUserKeyPress);
+		window.addEventListener('keypress', handleUserKeyPress);
 
 		return () => {
-			window.removeEventListener('keydown', handleUserKeyPress);
+			window.removeEventListener('keypress', handleUserKeyPress);
 		};
 	}, [handleUserKeyPress]);
 
@@ -44,7 +47,20 @@ const Counter = (props: Props) => {
 						<img src={pokemon.imageUrl ?? defaultImageUrl} alt="pokemon image" />
 					</PokemonSphere>
 				</PokemonContainer>
-				<StyledCounter wide={props.wide}>{count}</StyledCounter>
+				<StyledCounter wide={props.wide}>
+					{editingCount ? (
+						<StyledInput
+							wide={props.wide}
+							value={count}
+							onChange={(e) =>
+								props.setHuntCounter(id, isNaN(Number.parseInt(e.target.value)) ? 0 : Number.parseInt(e.target.value))
+							}
+							type="number"
+						/>
+					) : (
+						count
+					)}
+				</StyledCounter>
 			</div>
 		</StyledBorder>
 	);
@@ -86,7 +102,11 @@ const PokemonContainer = styled.div<{ wide: boolean }>`
 	width: 100%;
 	margin: auto;
 	margin-bottom: 60px;
-	display: ${(props) => (props.wide ? 'inline-flex' : 'block')};
+	margin-top: ${(props) => (props.wide ? '5px' : '0')};
+	display: flex;
+	position: ${(props) => (props.wide ? 'absolute' : 'initial')};
+	left: 100px;
+	width: ${(props) => (props.wide ? '200px' : '270px')};
 `;
 
 // TODO: Make the height and width a var.
@@ -108,12 +128,25 @@ const PokemonSphere = styled.div`
 	}
 `;
 
+const StyledInput = styled.input<{ wide: boolean }>`
+	color: white;
+	height: 30%;
+	border: none;
+	outline: none;
+	width: fit-content;
+	font-size: 42px;
+	position: ${(props) => (props.wide ? 'absolute' : 'unset')};
+`;
+
 const StyledCounter = styled.div<{ wide: boolean }>`
 	height: 30%;
 	font-size: 42px;
 	margin: auto;
-	width: 50px;
-	display: ${(props) => (props.wide ? 'inline-flex' : 'block')};
+	width: fit-content;
+	display: flex;
+	position: ${(props) => (props.wide ? 'relative' : 'unset')};
+	top: 206px;
+	right: 30px;
 `;
 
 export default Counter;
