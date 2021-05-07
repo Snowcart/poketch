@@ -1,5 +1,5 @@
-import UserData from "src/models/UserData";
 import { v4 as uuidv4 } from 'uuid';
+import UserData from '../models/UserData';
 
 const userDataKey = 'userData';
 

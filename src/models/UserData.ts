@@ -1,7 +1,6 @@
-import Hunt from "./Hunt";
+import Hunt from './Hunt';
 
-export default interface UserData
-{
+export default interface UserData {
 	name: string;
 	currentHunts: Hunt[];
 	completedHunts: Hunt[];

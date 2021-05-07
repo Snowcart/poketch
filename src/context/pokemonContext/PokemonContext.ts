@@ -1,5 +1,5 @@
-import * as React from "react";
-import Pokemon from "../../models/Pokemon";
+import * as React from 'react';
+import Pokemon from '../../models/Pokemon';
 
 export interface PokemonContext {
 	pokemon: Pokemon[];
@@ -7,7 +7,7 @@ export interface PokemonContext {
 
 const defaultPokemonContext = {
 	pokemon: [] as Pokemon[]
-}
+};
 
 const pokemonContext = React.createContext<PokemonContext>(defaultPokemonContext);
 export default pokemonContext;

@@ -1,5 +1,7 @@
 import * as React from 'react';
 import { v4 as uuidv4 } from 'uuid';
+import Autocomplete from '@material-ui/lab/Autocomplete';
+import { TextField } from '@material-ui/core';
 import Hunt from '../models/Hunt';
 import Button from '../commonComponents/Button';
 import { userDataContext } from '../context/userDataContext/UserDataContext';
@@ -8,8 +10,6 @@ import Counter from '../commonComponents/Counter';
 import pokemonContext from '../context/pokemonContext/PokemonContext';
 import Dialog from '../commonComponents/Dialog';
 import PokemonAutocomplete from './PokemonAutocomplete';
-import Autocomplete from '@material-ui/lab/Autocomplete';
-import { TextField } from '@material-ui/core';
 
 interface PokemonFormData {
 	selectedPokemon: Pokemon;
@@ -53,7 +53,6 @@ const MainPage = () => {
 			setOpenHuntWindow(false);
 		} else {
 			alert('Form not complete');
-			return;
 		}
 	};
 

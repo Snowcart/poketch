@@ -5,6 +5,7 @@ import { getDataFromLocalStorage, setDataInStorage } from '../../services/LocalS
 import { UserDataContext } from './UserDataContext';
 import UserData from '../../models/UserData';
 
+// eslint-disable-next-line import/prefer-default-export
 export const useUserDataContext = (): UserDataContext => {
 	const dataFromStorage = getDataFromLocalStorage();
 	const [userData, setUserData] = React.useState(dataFromStorage);
@@ -33,7 +34,7 @@ export const useUserDataContext = (): UserDataContext => {
 	const finishHunt = (id: string) => {
 		const updatedUserData = { ...userData };
 		const hunt = updatedUserData.currentHunts.find((x) => x.id === id);
-		if (!hunt) throw 'hunt not found';
+		if (!hunt) throw Error('hunt not found');
 		updatedUserData.completedHunts.push(hunt);
 		updatedUserData.currentHunts = updatedUserData.completedHunts.filter((x) => x.id !== id);
 		updateTheUserObject(updatedUserData);

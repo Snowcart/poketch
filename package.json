@@ -8,7 +8,7 @@
 		"webpack-prod-analyze": "webpack --config webpack.production.js --profile --json > dist/stats.json && webpack-bundle-analyzer dist/stats.json",
 		"webpack-prod": "webpack --config webpack.production.js",
 		"webpack-dev": "webpack --config webpack.development.js",
-		"lint": "npx prettier --check src/**/*.{js,jsx,ts,tsx} && src/**/*.{js,jsx,ts,tsx} && eslint src/**/*.{js,jsx,ts,tsx}"
+		"lint": "npx prettier --check src/**/*.{js,jsx,ts,tsx} && eslint src/**/*.{js,jsx,ts,tsx}"
 	},
 	"author": "Carter Snowden",
 	"license": "ISC",

@@ -1,10 +1,10 @@
+import styled from 'styled-components';
 import React from 'react';
+import { v4 as uuid } from 'uuid';
 import Counter from '../commonComponents/Counter';
 import Hunt from '../models/Hunt';
-import styled from 'styled-components';
 import pokemonContext from '../context/pokemonContext/PokemonContext';
 import { userDataContext } from '../context/userDataContext/UserDataContext';
-import { v4 as uuid } from 'uuid';
 import PokemonAutocomplete from './PokemonAutocomplete';
 import Pokemon from '../models/Pokemon';
 import Button from '../commonComponents/Button';
@@ -43,7 +43,7 @@ const StreamWrapper = (props: Props) => {
 			<span>Set count: </span>
 			<input
 				type="number"
-				onChange={(event) => setNewHunt({ ...newHunt, count: Number.parseInt(event.target.value) })}
+				onChange={(event) => setNewHunt({ ...newHunt, count: Number.parseInt(event.target.value, 10) })}
 			/>
 			<Button
 				text="start"
@@ -59,6 +59,10 @@ const StreamWrapper = (props: Props) => {
 interface Props {
 	wide?: boolean;
 }
+
+StreamWrapper.defaultProps = {
+	wide: false
+};
 
 const Wrapper = styled.div<Props>`
 	width: ${(props) => (props.wide ? '400px' : '270px')};

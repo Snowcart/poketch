@@ -3,7 +3,7 @@ import UserData from '../models/UserData';
 
 export const importHuntData = (json: string) => {
 	const data = JSON.parse(json);
-	return {...data} as UserData;
+	return { ...data } as UserData;
 };
 
 export const exportCharacter = (data: UserData) => {

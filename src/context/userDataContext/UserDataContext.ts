@@ -1,8 +1,8 @@
-import * as React from "react";
-import Hunt from "../../models/Hunt";
-import UserData from "../../models/UserData";
+import * as React from 'react';
+import Hunt from '../../models/Hunt';
+import UserData from '../../models/UserData';
 
-export interface UserDataContext { 
+export interface UserDataContext {
 	userData: UserData;
 	addActiveHunt: (hunt: Hunt) => void;
 	finishHunt: (id: string) => void;
@@ -20,6 +20,6 @@ const defaultUserDataContext = {
 	removeActiveHunt: () => {},
 	removeFinishedHunt: () => {},
 	setHuntCounter: () => {}
-}
+};
 
 export const userDataContext = React.createContext<UserDataContext>(defaultUserDataContext);

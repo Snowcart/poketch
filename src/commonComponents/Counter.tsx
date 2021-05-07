@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { backgroundBlue } from '../utility/colors';
 import styled from 'styled-components';
+import { backgroundBlue } from '../utility/colors';
 import Pokemon from '../models/Pokemon';
 import Hunt from '../models/Hunt';
 import deleteSvg from '../images/delete.svg';
@@ -44,16 +44,19 @@ const Counter = (props: Props) => {
 			<div onClick={() => increaseCounter()}>
 				<PokemonContainer wide={props.wide}>
 					<PokemonSphere>
-						<img src={pokemon.imageUrl ?? defaultImageUrl} alt="pokemon image" />
+						<img src={pokemon.imageUrl ?? defaultImageUrl} alt="pokemon" />
 					</PokemonSphere>
 				</PokemonContainer>
-				<StyledCounter wide={props.wide}>
+				<StyledCounter wide={props.wide} {...props.hunt}>
 					{editingCount ? (
 						<StyledInput
 							wide={props.wide}
 							value={count}
 							onChange={(e) =>
-								props.setHuntCounter(id, isNaN(Number.parseInt(e.target.value)) ? 0 : Number.parseInt(e.target.value))
+								props.setHuntCounter(
+									id,
+									Number.isNaN(Number.parseInt(e.target.value, 10)) ? 0 : Number.parseInt(e.target.value, 10)
+								)
 							}
 							type="number"
 						/>

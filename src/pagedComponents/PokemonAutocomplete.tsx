@@ -1,8 +1,8 @@
 import React from 'react';
-import pokemonContext from '../context/pokemonContext/PokemonContext';
-import Pokemon from '../models/Pokemon';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import { TextField } from '@material-ui/core';
+import pokemonContext from '../context/pokemonContext/PokemonContext';
+import Pokemon from '../models/Pokemon';
 
 const PokemonAutocomplete = (props: Props) => {
 	const context = React.useContext(pokemonContext);
