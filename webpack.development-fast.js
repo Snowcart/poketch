@@ -1,6 +1,6 @@
 const merge = require('webpack-merge');
-const development = require('./webpack.development.js');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
+const development = require('./webpack.development.js');
 
 module.exports = merge.smart(development, {
 	// Doesn't produce sourcemaps (a ~30% reduction in build time)
