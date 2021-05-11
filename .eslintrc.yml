@@ -25,6 +25,7 @@ plugins:
 rules:
   {
     import/extensions: ['error', 'never', { 'tsx': 'never', 'ts': 'never', 'js': 'never', 'jsx': 'never' }],
+    import/no-extraneous-dependencies: ["error", {"devDependencies": true}],
     react/jsx-filename-extension: [1, { 'extensions': ['.tsx', '.ts', '.jsx'] }],
     react/destructuring-assignment: [0],
     no-unused-vars: 0,
